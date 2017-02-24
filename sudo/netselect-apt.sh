@@ -15,8 +15,11 @@ fi
 URL=$(netselect-apt 2>&1 | grep -A 1 "fastest valid" | tail -n1 | xargs)
 APT="/etc/apt/sources.list"
 rm $APT
+echo "#deb http://httpredir.debian.org/debian jessie main" >> $APT
+echo "#deb http://security.debian.org/ jessie/updates main" >> $APT
+echo "" >> $APT     
 echo "deb http://security.debian.org/ jessie/updates main" >> $APT
 echo "deb $URL jessie main contrib" >> $APT
 echo "deb $URL jessie-backports main contrib" >> $APT
 
-apt-get udpate
+apt-get update
